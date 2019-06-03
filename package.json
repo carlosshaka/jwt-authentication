@@ -2,7 +2,7 @@
   "name": "jwt-authentication",
   "version": "1.0.0",
   "description": "Serveless function for jwt authentication",
-  "main": "index.js",
+  "main": "handler.js",
   "dependencies": {
     "jsonwebtoken": "^8.5.1"
   },
