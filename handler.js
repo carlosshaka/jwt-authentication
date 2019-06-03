@@ -1,7 +1,7 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 
-module.exports.verify = async token => {
+module.exports.verifyJWTToken = async token => {
   const { JWT_SECRET } = process.env
   try {
     var decoded = jwt.verify(token, JWT_SECRET);

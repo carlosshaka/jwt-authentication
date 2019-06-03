@@ -4,14 +4,14 @@ const jwt = require('jsonwebtoken');
 describe('When try verify', () => {
   let token;
   process.env.JWT_SECRET = 'shhhhh';
-  
+
   describe('and the token is valid', () => {
     beforeEach(() => {
       token = jwt.sign({ foo: 'bar' }, process.env.JWT_SECRET);
     });
 
     it('should return the decoded token', () => {
-      return handler.verify(token).then(response => {
+      return handler.verifyJWTToken(token).then(response => {
         expect(response.body).toBe('bar');
       });
     });
@@ -23,7 +23,7 @@ describe('When try verify', () => {
     });
 
     it('should return error message', () => {
-      return handler.verify(token).then(response => {
+      return handler.verifyJWTToken(token).then(response => {
         expect(response.body).toBe('invalid signature');
       });
     });
