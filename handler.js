@@ -1,14 +1,25 @@
 'use strict';
+const jwt = require('jsonwebtoken');
 
-module.exports.hello = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }, null, 2),
-  };
+module.exports.verify = async (event) => {
+  const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+  try {
+    var decoded = jwt.verify(token, 'shhhh');
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: decoded.foo
+      }, null, 2),
+    };
+    return response;
+  } catch (err) {
+    const response = {
+      statusCode: 403,
+      body: JSON.stringify({
+        message: err.message
+      }, null, 2),
+    };
+    return response;
+  }
 };
