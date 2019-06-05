@@ -17,10 +17,11 @@ provider:
   name: aws
   runtime: nodejs10.x
   profile: serverless	
-  region: us-east-1	
+  region: us-east-1
+  stage: prod
 
 functions:
-  verifyJWTToken:
-    handler: handler.verifyJWTToken
+  verify:
+    handler: handler.verify
     environment:
       secret: '${file(./jwt-secret.yml):jwt.secret}'
